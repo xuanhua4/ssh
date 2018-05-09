@@ -19,7 +19,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 /**
- * 指标项
+ * 指标�??
  * @author Administrator
  *
  */
@@ -31,23 +31,25 @@ public class Feenback_item implements java.io.Serializable{
 	private static final long serialVersionUID = 4132491235994715682L;
 
 	@Id  
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  
-	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Feenback_item")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq2")  
+	@SequenceGenerator(name="payablemoney_seq2", sequenceName="seq_fbi",allocationSize=1,initialValue=1)
 	@Column(name = "fb_id")
 	private int fb_id;//ID
 	
 	@Column(name = "fb_name", length=100)
-	private String fb_name;//指标项内容
+	private String fb_name;//指标项内�??
 	
 	@Column(name = "fb_score", length=11)
-	private int fb_score;//分值
+	private int fb_score;//分�??
 	
 	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
 	private Feenback feenback;
 
 	@OneToMany(mappedBy="feenback_item",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
 	private Set<Feenbackscore> feenbackscore = new HashSet<Feenbackscore>();
-
+	
+	@OneToMany(mappedBy="feenback_item",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	private Set<Collectd> Collectd=new HashSet<Collectd>();
 	public int getFb_id() {
 		return fb_id;
 	}

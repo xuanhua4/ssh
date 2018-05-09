@@ -25,7 +25,7 @@ public class Feenbackscore implements java.io.Serializable{
 	
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  
-	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Feenbackscore")
+	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_fbs",allocationSize=1,initialValue=1)
 	private int id;
 	
 	@Column(name = "score",unique=false)

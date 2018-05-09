@@ -24,7 +24,7 @@ public class Fb_time implements Serializable {
 	private static final long serialVersionUID = 952806715545438510L;
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  
-	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Fb_time")
+	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_fbt",allocationSize=1,initialValue=1)
 	private int id;
 	
 	@Column(name = "address", length=50,unique=false)

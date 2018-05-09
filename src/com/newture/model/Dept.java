@@ -24,7 +24,7 @@ public class Dept implements java.io.Serializable {
 	private static final long serialVersionUID = 650689672997768117L;
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  
-	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Dept")
+	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_dept",allocationSize=1,initialValue=1)
 	private int id;
 	
 	@Column(name = "deptname", length=20,unique=false)
