@@ -25,7 +25,7 @@ public class Course implements java.io.Serializable{
 	private static final long serialVersionUID = 4905603792679026782L;
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  
-	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_cour",allocationSize=1,initialValue=1)
+	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Course")
 	private int id;
 	
 	@Column(name = "coursename", length=50,unique=false)
@@ -42,18 +42,6 @@ public class Course implements java.io.Serializable{
 	
 	@OneToMany(mappedBy="course",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
 	private Set<Feenbackscore> feenbackscore = new HashSet<Feenbackscore>();
-
-	@OneToMany(mappedBy="course",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-	private Set<Collectd> collectd = new HashSet<Collectd>();
-	
-	
-	public Set<Collectd> getCollectd() {
-		return collectd;
-	}
-
-	public void setCollectd(Set<Collectd> collectd) {
-		this.collectd = collectd;
-	}
 
 	public int getId() {
 		return id;

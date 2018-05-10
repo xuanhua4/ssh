@@ -30,7 +30,7 @@ public class Users implements java.io.Serializable {
 	private static final long serialVersionUID = 472104487935690636L;
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  
-	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_usersW",allocationSize=1,initialValue=1)
+	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Users")
 	private int id;
 	
 	@Column(name = "username", length=50,unique=true)
@@ -87,17 +87,6 @@ public class Users implements java.io.Serializable {
 	@OneToMany(mappedBy="tusers",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
 	private Set<Opinion> opinion = new HashSet<Opinion>();
 	
-	@OneToMany(mappedBy="users",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-	private Set<Collectd> collectd = new HashSet<Collectd>();
-	
-	public Set<Collectd> getCollectd() {
-		return collectd;
-	}
-
-	public void setCollectd(Set<Collectd> collectd) {
-		this.collectd = collectd;
-	}
-
 	@ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER)  
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "rid"))  
 	@Cache(usage = CacheConcurrencyStrategy.NONE)

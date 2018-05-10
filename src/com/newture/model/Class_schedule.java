@@ -27,7 +27,7 @@ public class Class_schedule implements java.io.Serializable{
 	
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  
-	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_cla_s",allocationSize=1,initialValue=1)
+	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Class_schedule")
 	private int id;
 	
 	@Column(name = "statu", unique=false)

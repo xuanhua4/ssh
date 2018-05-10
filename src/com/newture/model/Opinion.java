@@ -29,7 +29,7 @@ public class Opinion implements Serializable {
 	
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  
-	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_op",allocationSize=1,initialValue=1)
+	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Opinion")
 	private int id;
 	
 	@Column(name = "username", length=50,unique=false)

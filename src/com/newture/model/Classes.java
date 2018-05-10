@@ -26,7 +26,7 @@ public class Classes implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  
-	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_cla",allocationSize=1,initialValue=1)
+	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Classes")
 	private int cid;
 	
 	@Column(name = "classname", length=50,unique=true)

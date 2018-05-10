@@ -27,8 +27,8 @@ public class Feenback implements java.io.Serializable{
 	
 	private static final long serialVersionUID = -3957309199633381668L;
 	@Id  
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq1")  
-	@SequenceGenerator(name="payablemoney_seq1", sequenceName="seq_fb",allocationSize=1,initialValue=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  
+	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_feenback",allocationSize=1,initialValue=1)
 	private int feenback_id;//id
 	@Column(name = "feenback_name", length=50,unique=true)
 	private String feenback_name;//类名
