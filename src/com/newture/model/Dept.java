@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -36,7 +37,8 @@ public class Dept implements java.io.Serializable {
 	@Column(name = "address", length=50,unique=false)
 	private String address;
 	
-	@OneToMany(mappedBy="dept",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@JoinColumn(name="dept_id",nullable=true)
 	private Set<Users> users = new HashSet<Users>();
 	
 	public int getId() {

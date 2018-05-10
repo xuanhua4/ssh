@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -38,16 +39,19 @@ public class Classes implements java.io.Serializable{
 	@Column(name = "createtime",unique=false)
 	private Date createtime;
 	
-	@OneToMany(mappedBy="classes",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@JoinColumn(name="classes_id",nullable=true)
 	private Set<Class_schedule> classchedule = new HashSet<Class_schedule>();
 	
-	@OneToMany(mappedBy="stuclasses",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@JoinColumn(name="stuclasses_id",nullable=true)
 	private Set<Users> users = new HashSet<Users>();
 	
 	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
 	private Users tusers;
 	
-	@OneToMany(mappedBy="classes",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@JoinColumn(name="classes_id",nullable=true)
 	private Set<Feenbackscore> Feenbackscore = new HashSet<Feenbackscore>();
 
 	public int getCid() {

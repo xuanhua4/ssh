@@ -22,6 +22,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.sun.istack.internal.NotNull;
+
 
 @Entity
 @Table(name="users")
@@ -63,33 +65,38 @@ public class Users implements java.io.Serializable {
 	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
 	private Dept dept;
 	
-	@OneToMany(mappedBy="users",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@JoinColumn(name="users_id",nullable=true)
 	private Set<Class_schedule> classchedule = new HashSet<Class_schedule>();
 	
-	@OneToMany(mappedBy="users",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@JoinColumn(name="users_id",nullable=true)
 	private Set<Fb_time> fb_time = new HashSet<Fb_time>();
 	
 	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
 	private Classes stuclasses;
 	
-	@OneToMany(mappedBy="tusers",cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
+	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
+	@JoinColumn(name="tusers_id",nullable=true)
 	private Set<Classes> classes = new HashSet<Classes>();
 	
-	@OneToMany(mappedBy="tusers",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@JoinColumn(name="tusers_id",nullable=true)
 	private Set<Feenbackscore> tfeenbackscore = new HashSet<Feenbackscore>();
 	
-	@OneToMany(mappedBy="stusers",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@JoinColumn(name="stusers_id",nullable=true)
 	private Set<Feenbackscore> stufeenbackscore = new HashSet<Feenbackscore>();
 	
 	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
 	private Opinion opinions;
 	
-	@OneToMany(mappedBy="tusers",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@JoinColumn(name="tusers_id",nullable=true)
 	private Set<Opinion> opinion = new HashSet<Opinion>();
 	
 	@ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER)  
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "rid"))  
-	@Cache(usage = CacheConcurrencyStrategy.NONE)
 	private Set<Role> roles;
 
 	public int getId() {

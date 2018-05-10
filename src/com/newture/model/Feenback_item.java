@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -45,9 +47,13 @@ public class Feenback_item implements java.io.Serializable{
 	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
 	private Feenback feenback;
 
-	@OneToMany(mappedBy="feenback_item",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@JoinColumn(name="feenback_item_id",nullable=true)
 	private Set<Feenbackscore> feenbackscore = new HashSet<Feenbackscore>();
 
+	@ManyToMany(mappedBy = "feenback", targetEntity = Class_schedule.class)
+	private Set<Class_schedule> classchedule;
+	
 	public int getFb_id() {
 		return fb_id;
 	}

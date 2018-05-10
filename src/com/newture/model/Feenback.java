@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -33,7 +34,8 @@ public class Feenback implements java.io.Serializable{
 	@Column(name = "feenback_name", length=50,unique=true)
 	private String feenback_name;//类名
 	
-	@OneToMany(mappedBy="feenback",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@JoinColumn(name="feenback_id",nullable=true)
 	private Set<Feenback_item> feenback_item = new HashSet<Feenback_item>();
 	public Set<Feenback_item> getFeenback() {
 		return feenback_item;
