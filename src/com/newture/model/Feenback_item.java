@@ -54,6 +54,10 @@ public class Feenback_item implements java.io.Serializable{
 	@ManyToMany(mappedBy = "feenback", targetEntity = Class_schedule.class)
 	private Set<Class_schedule> classchedule;
 	
+	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@JoinColumn(name="feenback_item_id",nullable=true)
+	private Set<Collectd> Collectd=new HashSet<Collectd>();
+	
 	public int getFb_id() {
 		return fb_id;
 	}
