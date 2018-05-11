@@ -25,7 +25,7 @@ public class Course implements java.io.Serializable{
 
 	private static final long serialVersionUID = 4905603792679026782L;
 	@Id  
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  //生成策略
 	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Course")
 	private int id;
 	
