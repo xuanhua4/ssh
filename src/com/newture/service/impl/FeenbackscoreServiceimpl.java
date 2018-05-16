@@ -76,8 +76,8 @@ public class FeenbackscoreServiceimpl implements FeenbackscoreService {
 		// TODO Auto-generated method stub
 		String hql="from Users u1 where u1.id=?";
 		Object[] param = {id};
-		List<Users> classes = usersDao.find(hql, param);
-		return classes.get(0);
+		List<Users> users = usersDao.find(hql, param);
+		return users.get(0);
 	}
 	@Override
 	public Integer count() {

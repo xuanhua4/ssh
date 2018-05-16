@@ -1,6 +1,8 @@
 package com.newture.action;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
+import com.newture.model.Feenback;
 import com.newture.model.Feenback_item;
 import com.newture.service.Feenback_itemService;
 import com.newture.util.Json;
@@ -32,7 +35,6 @@ public class FeenbackitemAction extends ActionSupport implements ServletRequestA
 	private Feenback_item feenback_item;
 	private int page1;
 	private int limit1;
-	
 	public int getPage1() {
 		return page1;
 	}
@@ -51,7 +53,7 @@ public class FeenbackitemAction extends ActionSupport implements ServletRequestA
 	public void setFeenback_item(Feenback_item feenback_item) {
 		this.feenback_item = feenback_item;
 	}
-
+	
 	/**
 	 * 保存一个对象
 	 * @return

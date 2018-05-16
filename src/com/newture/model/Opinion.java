@@ -30,20 +30,19 @@ public class Opinion implements Serializable {
 	
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  
-	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Opinion")
+	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Opinion",allocationSize=1,initialValue=1)
 	private int id;
 	
-	@Column(name = "username", length=50,unique=false)
+	@Column(name = "content", length=50,unique=false)
 	private	String content;
 	
 	@Column(name = "createtime",unique=false)
 	private	Date createtimt;
 	
-	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.ALL},optional = true,fetch = FetchType.EAGER)
 	private Users tusers;
 	
-	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-	@JoinColumn(name="opinions_id",nullable=true)
+	@OneToMany(mappedBy="opinions",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
 	private Set<Users> users = new HashSet<Users>();
 
 	public int getId() {

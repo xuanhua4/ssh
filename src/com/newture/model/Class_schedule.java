@@ -30,28 +30,46 @@ public class Class_schedule implements java.io.Serializable{
 	
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  
-	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Class_schedule")
+	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Class_schedule",allocationSize=1,initialValue=1)
 	private int id;
 	
 	@Column(name = "statu", unique=false)
 	private int statu;
 	
-	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.ALL},optional = true,fetch = FetchType.EAGER)
 	private Course course;
 	
-	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.ALL},optional = true,fetch = FetchType.EAGER)
 	private Users users;
 	
-	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.ALL},optional = true,fetch = FetchType.EAGER)
 	private Classes classes;
 	
-	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-	@JoinColumn(name="classchedule_id",nullable=true)
+	@OneToMany(mappedBy="classchedule",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
 	private Set<Fb_time> fb_time = new HashSet<Fb_time>();
 	
-	@ManyToMany(targetEntity = Feenback.class, fetch = FetchType.EAGER)  
-	@JoinTable(name = "feenback_classchedule", joinColumns = @JoinColumn(name = "feenback_id"), inverseJoinColumns = @JoinColumn(name = "id"))  
+	@ManyToMany(mappedBy = "classchedule", targetEntity = Feenback.class)
 	private Set<Feenback> feenback;
+	
+	@Column(name = "lot", unique=false)
+	private String lot;
+	
+
+	public Set<Feenback> getFeenback() {
+		return feenback;
+	}
+
+	public void setFeenback(Set<Feenback> feenback) {
+		this.feenback = feenback;
+	}
+
+	public String getLot() {
+		return lot;
+	}
+
+	public void setLot(String lot) {
+		this.lot = lot;
+	}
 
 	public int getId() {
 		return id;

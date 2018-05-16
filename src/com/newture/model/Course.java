@@ -26,7 +26,7 @@ public class Course implements java.io.Serializable{
 	private static final long serialVersionUID = 4905603792679026782L;
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  //生成策略
-	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Course")
+	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Course",allocationSize=1,initialValue=1)
 	private int id;
 	
 	@Column(name = "coursename", length=50,unique=false)
@@ -38,13 +38,14 @@ public class Course implements java.io.Serializable{
 	@Column(name = "coursetype", length=50,unique=false)
 	private int coursetype;
 	
-	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-	@JoinColumn(name="course_id",nullable=true)
+	@OneToMany(mappedBy="course",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
 	private Set<Class_schedule> classchedule = new HashSet<Class_schedule>();
 	
-	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-	@JoinColumn(name="course_id",nullable=true)
+	@OneToMany(mappedBy="course",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
 	private Set<Feenbackscore> feenbackscore = new HashSet<Feenbackscore>();
+	
+	@OneToMany(mappedBy="course",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	private Set<Major_statistics> major_statistics = new HashSet<Major_statistics>();
 
 	public int getId() {
 		return id;
@@ -93,5 +94,12 @@ public class Course implements java.io.Serializable{
 	public void setFeenbackscore(Set<Feenbackscore> feenbackscore) {
 		this.feenbackscore = feenbackscore;
 	}
-	
+
+	public Set<Major_statistics> getMajor_statistics() {
+		return major_statistics;
+	}
+
+	public void setMajor_statistics(Set<Major_statistics> major_statistics) {
+		this.major_statistics = major_statistics;
+	}
 }

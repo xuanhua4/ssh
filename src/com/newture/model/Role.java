@@ -26,7 +26,7 @@ public class Role implements java.io.Serializable{
 	
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  
-	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Role")
+	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Role",allocationSize=1,initialValue=1)
 	private int rid;
 	
 	@Column(name = "rolename", length=60,unique=false)

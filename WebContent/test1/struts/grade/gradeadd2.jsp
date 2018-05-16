@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"
 	contentType="text/html; charset=utf-8"%>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -23,8 +24,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<button style="margin-left: 10px;" class="layui-btn layui-btn-primary" data-type="isAll">验证是否全选</button>
 		<button style="margin-left: 10px;" class="layui-btn layui-btn-primary" data-type="add">新增</button>
 	</div><hr/>
-	<table class="layui-table" lay-data="{width:1000, url:'Feenbackscore_find.action',id:'test3'}" lay-filter="test3">
-  <thead>
+	
+		<table class="layui-table" lay-data="{width:1000, url:'Feenback_findByid.action?f1id=1',id:'test3'}" lay-filter="test3">
+  		<thead>
   	 <tr>
    	 	<th lay-data="{align:'center',width: 1000}" rowspan="1" colspan="4">指标类别</th>
    	 </tr>
@@ -39,6 +41,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </tr>
   </thead>
   </table>
+  <c:forEach items="${fid }" var="aco">
+  </c:forEach>
 	<div id="demo"></div>
 </body>
 <script src="../../plugins/layui/layui.js"></script>

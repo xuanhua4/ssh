@@ -24,7 +24,7 @@ public class Fb_time implements Serializable {
 	private static final long serialVersionUID = 952806715545438510L;
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  
-	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Fb_time")
+	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Fb_time",allocationSize=1,initialValue=1)
 	private int id;
 	
 	@Column(name = "address", length=50,unique=false)
@@ -42,10 +42,10 @@ public class Fb_time implements Serializable {
 	@Column(name = "statu", length=50,unique=false)
 	private	int statu;
 	
-	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.ALL},optional = true,fetch = FetchType.EAGER)
 	private Class_schedule classchedule;
 	
-	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.ALL},optional = true,fetch = FetchType.EAGER)
 	private Users users;
 
 	public int getId() {

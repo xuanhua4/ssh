@@ -34,7 +34,7 @@ public class Feenback_item implements java.io.Serializable{
 
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  
-	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Feenback_item")
+	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Feenback_item",allocationSize=1,initialValue=1)
 	@Column(name = "fb_id")
 	private int fb_id;//ID
 	
@@ -44,23 +44,40 @@ public class Feenback_item implements java.io.Serializable{
 	@Column(name = "fb_score", length=11)
 	private int fb_score;//分值
 	
-	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.ALL},optional = true,fetch = FetchType.EAGER)
 	private Feenback feenback;
 
-	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-	@JoinColumn(name="feenback_item_id",nullable=true)
+	@OneToMany(mappedBy="feenback_item",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
 	private Set<Feenbackscore> feenbackscore = new HashSet<Feenbackscore>();
 
-	@ManyToMany(mappedBy = "feenback", targetEntity = Class_schedule.class)
-	private Set<Class_schedule> classchedule;
-	
-	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-	@JoinColumn(name="feenback_item_id",nullable=true)
+	@OneToMany(mappedBy="feenback_item",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
 	private Set<Collectd> Collectd=new HashSet<Collectd>();
+	
+	@OneToMany(mappedBy="feenback_item",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	private Set<Major_statistics> majorstatistics=new HashSet<Major_statistics>();
+	
+	
 	
 	public int getFb_id() {
 		return fb_id;
 	}
+
+	public Set<Collectd> getCollectd() {
+		return Collectd;
+	}
+
+	public void setCollectd(Set<Collectd> collectd) {
+		Collectd = collectd;
+	}
+
+	public Set<Major_statistics> getMajorstatistics() {
+		return majorstatistics;
+	}
+
+	public void setMajorstatistics(Set<Major_statistics> majorstatistics) {
+		this.majorstatistics = majorstatistics;
+	}
+
 
 	public void setFb_id(int fb_id) {
 		this.fb_id = fb_id;

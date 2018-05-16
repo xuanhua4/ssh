@@ -11,11 +11,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 指标类别
@@ -34,16 +35,26 @@ public class Feenback implements java.io.Serializable{
 	@Column(name = "feenback_name", length=50,unique=true)
 	private String feenback_name;//类名
 	
-	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-	@JoinColumn(name="feenback_id",nullable=true)
+	@OneToMany(mappedBy="feenback",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
 	private Set<Feenback_item> feenback_item = new HashSet<Feenback_item>();
-	public Set<Feenback_item> getFeenback() {
+	
+	@ManyToMany(targetEntity = Class_schedule.class, fetch = FetchType.EAGER)  
+	@JoinTable(name = "classschedule_feenback", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "feenback_id"))  
+	private Set<Class_schedule> classchedule;
+	
+	public Set<Feenback_item> getFeenback_item() {
 		return feenback_item;
 	}
-	public void setFeenback(Set<Feenback_item> feenback_item) {
+	public void setFeenback_item(Set<Feenback_item> feenback_item) {
 		this.feenback_item = feenback_item;
 	}
 	
+	public Set<Class_schedule> getClasschedule() {
+		return classchedule;
+	}
+	public void setClasschedule(Set<Class_schedule> classchedule) {
+		this.classchedule = classchedule;
+	}
 	public int getFeenback_id() {
 		return feenback_id;
 	}
@@ -59,9 +70,5 @@ public class Feenback implements java.io.Serializable{
 	public void setFeenback_name(String feenback_name) {
 		this.feenback_name = feenback_name;
 	}
-	@Override
-	public String toString() {
-		return "Feenback [feenback_id=" + feenback_id + ", feenback_name=" + feenback_name + ", feenback_item="
-				+ feenback_item + "]";
-	}
+
 }

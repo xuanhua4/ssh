@@ -1,7 +1,10 @@
 package com.newture.action;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
+import com.newture.model.Class_schedule;
 import com.newture.model.Classes;
 import com.newture.model.Feenback;
 import com.newture.model.Feenback_item;
@@ -118,7 +122,7 @@ public class FeenbackscoreAction extends ActionSupport implements ServletRequest
 			for(int i = 0;i<=fid.length-1;i++){
 				feenback_item = feenbackitemService.findById(fid[i]);
 			}
-			feenback.getFeenback().add(feenback_item);
+			feenback.getFeenback_item().add(feenback_item);
 		}
 		//feenbackscoreService.save(feenbackscore);
 	}
@@ -138,17 +142,18 @@ public class FeenbackscoreAction extends ActionSupport implements ServletRequest
 	public String find() throws Exception{
 		Users users =feenbackscoreService.findClass(1);
 		Classes cls = users.getStuclasses();
-		int count = feenbackService.count();
-		Json j = new Json();
-		j.setCount(count);
-		//对象转json，返回到前端
-		JsonConfig config = new JsonConfig();  
-		config.setExcludes(new String[]{"feenback","feenback_item"});
-		String list =  JSONArray.fromObject(j,config).toString();
-		String list1 = list.substring(1,list.length()-1);
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("application/json; charset=utf-8");
-		response.getWriter().print(list1);
+		Set<Class_schedule> classschedule = cls.getClasschedule();
+		List<Integer> fid =null;
+		for(Object obj:classschedule){
+			 Class_schedule c1 = (Class_schedule) obj;
+			 Set<Feenback> feenback = c1.getFeenback();
+	         for(Object obj1:feenback){
+	        	 Feenback c2 = (Feenback) obj;
+	        	 fid.add(c2.getFeenback_id());
+		     }
+	     }
+		List<Integer> newList = new ArrayList<Integer>(new TreeSet<Integer>(fid));
+		request.setAttribute("fid", newList);
 		return NONE;
 	}
 	public String findbyid(){

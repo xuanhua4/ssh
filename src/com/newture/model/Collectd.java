@@ -30,7 +30,7 @@ public class Collectd {
 	@Column(name = "lot", length=50,unique=true)
 	private int lot;
 	
-	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.ALL},optional = true,fetch = FetchType.EAGER)
 	private Feenback_item feenback_item;
 
 	public Integer getCollectId() {

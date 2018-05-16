@@ -1,5 +1,6 @@
 package com.newture.action;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +37,7 @@ public class FeenbackAction extends ActionSupport implements ServletRequestAware
 	private Feenback feenback;
 	private Feenback_item feenback_item;
 	private Integer[] fid;
+	private int f1id;
 	private int page1;
 	private int limit1;
 	
@@ -53,6 +55,14 @@ public class FeenbackAction extends ActionSupport implements ServletRequestAware
 
 	public void setPage1(int page1) {
 		this.page1 = page1;
+	}
+	
+	public int getF1id() {
+		return f1id;
+	}
+
+	public void setF1id(int f1id) {
+		this.f1id = f1id;
 	}
 
 	public int getLimit1() {
@@ -93,7 +103,7 @@ public class FeenbackAction extends ActionSupport implements ServletRequestAware
 			for(int i = 0;i<=fid.length-1;i++){
 				feenback_item = feenbackitemService.findById(fid[i]);
 			}
-			feenback.getFeenback().add(feenback_item);
+			feenback.getFeenback_item().add(feenback_item);
 		}
 		feenbackService.save(feenback);
 	}
@@ -131,6 +141,22 @@ public class FeenbackAction extends ActionSupport implements ServletRequestAware
 		HttpSession session = request.getSession();
 		session.setAttribute("feenback", f);
 		return "update";
+	}
+	public String findByid() throws IOException{
+		ArrayList data = null;
+		Feenback f =  feenbackService.findById(10);
+		data.add(f.getFeenback_item());
+		Json j = new Json();
+		j.setData(data);
+		//对象转json，返回到前端
+		JsonConfig config = new JsonConfig();  
+		config.setExcludes(new String[]{"feenback","feenbackscore"});
+		String list =  JSONArray.fromObject(j,config).toString();
+		String list1 = list.substring(1,list.length()-1);
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json; charset=utf-8");
+		response.getWriter().print(list1);
+		return NONE;
 	}
 	/**
 	 * 删除一个对象

@@ -23,7 +23,7 @@ public class Power implements Serializable {
 	
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  
-	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Power")
+	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Power",allocationSize=1,initialValue=1)
 	private int pid;
 	
 	@Column(name = "powername", length=50,unique=false)

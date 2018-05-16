@@ -37,7 +37,7 @@ public class FeenbackDaoimpl<T> implements FeenbackDao<T>{
 	}
 
 	public int save(T o) {
-		return (int) this.getCurrentSession().save(o);
+		return (int) getCurrentSession().save(o);
 	}
 
 	public void delete(T o) {
@@ -109,7 +109,7 @@ public class FeenbackDaoimpl<T> implements FeenbackDao<T>{
 	}
 
 	public T get(Class<T> c, Serializable id) {
-		return (T) this.getCurrentSession().get(c, id);
+		return (T)getCurrentSession().get(c, id);
 	}
 
 	public T get(String hql, Object[] param) {

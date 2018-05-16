@@ -32,7 +32,7 @@ public class Users implements java.io.Serializable {
 	private static final long serialVersionUID = 472104487935690636L;
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  
-	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Users")
+	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Users",allocationSize=1,initialValue=1)
 	private int id;
 	
 	@Column(name = "username", length=50,unique=true)
@@ -62,42 +62,39 @@ public class Users implements java.io.Serializable {
 	@Column(name = "statu",unique=false)
 	private	int statu;
 	
-	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.ALL},optional = true,fetch = FetchType.EAGER)
 	private Dept dept;
 	
-	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-	@JoinColumn(name="users_id",nullable=true)
+	@OneToMany(mappedBy="users",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
 	private Set<Class_schedule> classchedule = new HashSet<Class_schedule>();
 	
-	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-	@JoinColumn(name="users_id",nullable=true)
+	@OneToMany(mappedBy="users",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
 	private Set<Fb_time> fb_time = new HashSet<Fb_time>();
 	
-	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.ALL},optional = true,fetch = FetchType.EAGER)
 	private Classes stuclasses;
 	
-	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
-	@JoinColumn(name="tusers_id",nullable=true)
+	@OneToMany(mappedBy="tusers",cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
 	private Set<Classes> classes = new HashSet<Classes>();
 	
-	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-	@JoinColumn(name="tusers_id",nullable=true)
+	@OneToMany(mappedBy="tusers",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
 	private Set<Feenbackscore> tfeenbackscore = new HashSet<Feenbackscore>();
 	
-	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-	@JoinColumn(name="stusers_id",nullable=true)
+	@OneToMany(mappedBy="stusers",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
 	private Set<Feenbackscore> stufeenbackscore = new HashSet<Feenbackscore>();
 	
-	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.ALL},optional = true,fetch = FetchType.EAGER)
 	private Opinion opinions;
 	
-	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-	@JoinColumn(name="tusers_id",nullable=true)
+	@OneToMany(mappedBy="tusers",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
 	private Set<Opinion> opinion = new HashSet<Opinion>();
 	
 	@ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER)  
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "rid"))  
 	private Set<Role> roles;
+	
+	@OneToMany(mappedBy="users",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	private Set<Major_statistics> major_statistics = new HashSet<Major_statistics>();
 
 	public int getId() {
 		return id;
@@ -258,16 +255,13 @@ public class Users implements java.io.Serializable {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-	
-	@Override
-	public String toString() {
-		return "Users [id=" + id + ", username=" + username + ", password=" + password + ", truename=" + truename
-				+ ", sex=" + sex + ", age=" + age + ", address=" + address + ", tel=" + tel + ", card=" + card
-				+ ", statu=" + statu + ", dept=" + dept + ", classchedule=" + classchedule + ", fb_time=" + fb_time
-				+ ", stuclasses=" + stuclasses + ", classes=" + classes + ", tfeenbackscore=" + tfeenbackscore
-				+ ", stufeenbackscore=" + stufeenbackscore + ", opinions=" + opinions + ", opinion=" + opinion
-				+ ", roles=" + roles + "]";
-	} 
-	
+
+	public Set<Major_statistics> getMajor_statistics() {
+		return major_statistics;
+	}
+
+	public void setMajor_statistics(Set<Major_statistics> major_statistics) {
+		this.major_statistics = major_statistics;
+	}
 	
 }

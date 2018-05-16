@@ -27,7 +27,7 @@ public class Classes implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  
-	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Classes")
+	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Classes",allocationSize=1,initialValue=1)
 	private int cid;
 	
 	@Column(name = "classname", length=50,unique=true)
@@ -39,21 +39,22 @@ public class Classes implements java.io.Serializable{
 	@Column(name = "createtime",unique=false)
 	private Date createtime;
 	
-	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-	@JoinColumn(name="classes_id",nullable=true)
+	@OneToMany(mappedBy="classes",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
 	private Set<Class_schedule> classchedule = new HashSet<Class_schedule>();
 	
-	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-	@JoinColumn(name="stuclasses_id",nullable=true)
+	@OneToMany(mappedBy="stuclasses",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
 	private Set<Users> users = new HashSet<Users>();
 	
-	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.ALL},optional = true,fetch = FetchType.EAGER)
 	private Users tusers;
 	
-	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-	@JoinColumn(name="classes_id",nullable=true)
+	@OneToMany(mappedBy="classes",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
 	private Set<Feenbackscore> Feenbackscore = new HashSet<Feenbackscore>();
+	
 
+	@OneToMany(mappedBy="classes",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	private Set<Major_statistics> major_statistics = new HashSet<Major_statistics>();
+	
 	public int getCid() {
 		return cid;
 	}
@@ -118,13 +119,15 @@ public class Classes implements java.io.Serializable{
 		Feenbackscore = feenbackscore;
 	}
 
-	@Override
-	public String toString() {
-		return "Classes [cid=" + cid + ", classname=" + classname + ", statu=" + statu + ", createtime=" + createtime
-				+ ", classchedule=" + classchedule + ", users=" + users + ", tusers=" + tusers + ", Feenbackscore="
-				+ Feenbackscore + "]";
+	public Set<Major_statistics> getMajor_statistics() {
+		return major_statistics;
 	}
 
+	public void setMajor_statistics(Set<Major_statistics> major_statistics) {
+		this.major_statistics = major_statistics;
+	}
+
+	
 
 	
 	

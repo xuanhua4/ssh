@@ -25,7 +25,7 @@ public class Feenbackscore implements java.io.Serializable{
 	
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  
-	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Feenbackscore")
+	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Feenbackscore",allocationSize=1,initialValue=1)
 	private int id;
 	
 	@Column(name = "score",unique=false)
@@ -37,20 +37,31 @@ public class Feenbackscore implements java.io.Serializable{
 	@Column(name = "statu",unique=false)
 	private	int statu;
 	
-	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.ALL},optional = true,fetch = FetchType.EAGER)
 	private Classes classes;
 	
-	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.ALL},optional = true,fetch = FetchType.EAGER)
 	private Feenback_item feenback_item;
 	
-	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.ALL},optional = true,fetch = FetchType.EAGER)
 	private Users tusers;
 	
-	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.ALL},optional = true,fetch = FetchType.EAGER)
 	private Users stusers;
 	
-	@ManyToOne(cascade = {CascadeType.ALL},optional = false,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.ALL},optional = true,fetch = FetchType.EAGER)
 	private Course course;
+	
+	@Column(name = "lot",unique=false)
+	private String lot;
+	
+	public String getLot() {
+		return lot;
+	}
+
+	public void setLot(String lot) {
+		this.lot = lot;
+	}
 
 	public int getId() {
 		return id;

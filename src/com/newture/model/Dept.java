@@ -25,7 +25,7 @@ public class Dept implements java.io.Serializable {
 	private static final long serialVersionUID = 650689672997768117L;
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="payablemoney_seq")  
-	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Dept")
+	@SequenceGenerator(name="payablemoney_seq", sequenceName="seq_Dept",allocationSize=1,initialValue=1)
 	private int id;
 	
 	@Column(name = "deptname", length=20,unique=false)
@@ -37,8 +37,7 @@ public class Dept implements java.io.Serializable {
 	@Column(name = "address", length=50,unique=false)
 	private String address;
 	
-	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-	@JoinColumn(name="dept_id",nullable=true)
+	@OneToMany(mappedBy="dept",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
 	private Set<Users> users = new HashSet<Users>();
 	
 	public int getId() {
