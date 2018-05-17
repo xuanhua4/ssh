@@ -39,20 +39,20 @@ public class Classes implements java.io.Serializable{
 	@Column(name = "createtime",unique=false)
 	private Date createtime;
 	
-	@OneToMany(mappedBy="classes",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="classes",cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
 	private Set<Class_schedule> classchedule = new HashSet<Class_schedule>();
 	
-	@OneToMany(mappedBy="stuclasses",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="stuclasses",cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
 	private Set<Users> users = new HashSet<Users>();
 	
 	@ManyToOne(cascade = {CascadeType.ALL},optional = true,fetch = FetchType.EAGER)
 	private Users tusers;
 	
-	@OneToMany(mappedBy="classes",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="classes",cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
 	private Set<Feenbackscore> Feenbackscore = new HashSet<Feenbackscore>();
 	
 
-	@OneToMany(mappedBy="classes",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="classes",cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
 	private Set<Major_statistics> major_statistics = new HashSet<Major_statistics>();
 	
 	public int getCid() {

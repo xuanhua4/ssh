@@ -37,7 +37,7 @@ public class Opinion implements Serializable {
 	private	String content;
 	
 	@Column(name = "createtime",unique=false)
-	private	Date createtimt;
+	private	Date createtime;
 	
 	@ManyToOne(cascade = {CascadeType.ALL},optional = true,fetch = FetchType.EAGER)
 	private Users tusers;
@@ -61,12 +61,12 @@ public class Opinion implements Serializable {
 		this.content = content;
 	}
 
-	public Date getCreatetimt() {
-		return createtimt;
+	public Date getCreatetime() {
+		return createtime;
 	}
 
-	public void setCreatetimt(Date createtimt) {
-		this.createtimt = createtimt;
+	public void setCreatetime(Date createtime) {
+		this.createtime = createtime;
 	}
 
 	public Users getTusers() {

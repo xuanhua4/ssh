@@ -2,6 +2,8 @@ package com.newture.action;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -142,15 +144,20 @@ public class FeenbackAction extends ActionSupport implements ServletRequestAware
 		session.setAttribute("feenback", f);
 		return "update";
 	}
-	public String findByid() throws IOException{
-		ArrayList data = null;
-		Feenback f =  feenbackService.findById(10);
-		data.add(f.getFeenback_item());
+	public String findList() throws IOException{
+		ArrayList data = new ArrayList();
+		Feenback f =  feenbackService.findById(f1id);
+		Set<Feenback_item> f1 = f.getFeenback_item();
+		for(Feenback_item obj: f1){
+			data.add(obj);
+		}
+		
 		Json j = new Json();
 		j.setData(data);
 		//对象转json，返回到前端
+		
 		JsonConfig config = new JsonConfig();  
-		config.setExcludes(new String[]{"feenback","feenbackscore"});
+		config.setExcludes(new String[]{"feenback","feenbackscore","Collectd","majorstatistics"});
 		String list =  JSONArray.fromObject(j,config).toString();
 		String list1 = list.substring(1,list.length()-1);
 		HttpServletResponse response = ServletActionContext.getResponse();

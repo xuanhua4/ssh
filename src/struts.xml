@@ -12,7 +12,7 @@
     		<result name="success"> /test1/struts/index/ViewIndicator.jsp</result>
     	</action>
     	<action name="Feenbackscore_*" method="{1}" class="com.newture.action.FeenbackscoreAction">
-    		<result name="success"> /test1/struts/index/ViewIndicator.jsp</result>
+    		<result name="success" > /test1/struts/grade/gradeadd2.jsp</result>
     	</action>
     </package>
 </struts>

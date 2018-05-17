@@ -45,11 +45,11 @@ public class Class_schedule implements java.io.Serializable{
 	@ManyToOne(cascade = {CascadeType.ALL},optional = true,fetch = FetchType.EAGER)
 	private Classes classes;
 	
-	@OneToMany(mappedBy="classchedule",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="classchedule",cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
 	private Set<Fb_time> fb_time = new HashSet<Fb_time>();
 	
-	@ManyToMany(mappedBy = "classchedule", targetEntity = Feenback.class)
-	private Set<Feenback> feenback;
+	@ManyToMany(mappedBy = "classchedule", targetEntity = Feenback.class,fetch = FetchType.EAGER)
+	private Set<Feenback> feenback = new HashSet<Feenback>();
 	
 	@Column(name = "lot", unique=false)
 	private String lot;

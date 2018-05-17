@@ -44,16 +44,16 @@ public class Feenback_item implements java.io.Serializable{
 	@Column(name = "fb_score", length=11)
 	private int fb_score;//分值
 	
-	@ManyToOne(cascade = {CascadeType.ALL},optional = true,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = {CascadeType.ALL},optional = true,fetch = FetchType.LAZY)
 	private Feenback feenback;
 
-	@OneToMany(mappedBy="feenback_item",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="feenback_item",cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
 	private Set<Feenbackscore> feenbackscore = new HashSet<Feenbackscore>();
 
-	@OneToMany(mappedBy="feenback_item",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="feenback_item",cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
 	private Set<Collectd> Collectd=new HashSet<Collectd>();
 	
-	@OneToMany(mappedBy="feenback_item",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="feenback_item",cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
 	private Set<Major_statistics> majorstatistics=new HashSet<Major_statistics>();
 	
 	

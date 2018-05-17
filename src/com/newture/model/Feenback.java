@@ -35,12 +35,12 @@ public class Feenback implements java.io.Serializable{
 	@Column(name = "feenback_name", length=50,unique=true)
 	private String feenback_name;//类名
 	
-	@OneToMany(mappedBy="feenback",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="feenback",cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
 	private Set<Feenback_item> feenback_item = new HashSet<Feenback_item>();
 	
 	@ManyToMany(targetEntity = Class_schedule.class, fetch = FetchType.EAGER)  
-	@JoinTable(name = "classschedule_feenback", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "feenback_id"))  
-	private Set<Class_schedule> classchedule;
+	@JoinTable(name = "classschedule_feenback", joinColumns = @JoinColumn(name = "feenback_id"), inverseJoinColumns = @JoinColumn(name = "id"))  
+	private Set<Class_schedule> classchedule = new HashSet<Class_schedule>();;
 	
 	public Set<Feenback_item> getFeenback_item() {
 		return feenback_item;

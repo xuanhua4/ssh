@@ -263,5 +263,15 @@ public class Users implements java.io.Serializable {
 	public void setMajor_statistics(Set<Major_statistics> major_statistics) {
 		this.major_statistics = major_statistics;
 	}
+
+	@Override
+	public String toString() {
+		return "Users [id=" + id + ", username=" + username + ", password=" + password + ", truename=" + truename
+				+ ", sex=" + sex + ", age=" + age + ", address=" + address + ", tel=" + tel + ", card=" + card
+				+ ", statu=" + statu + ", dept=" + dept + ", classchedule=" + classchedule + ", fb_time=" + fb_time
+				+ ", stuclasses=" + stuclasses + ", classes=" + classes + ", tfeenbackscore=" + tfeenbackscore
+				+ ", stufeenbackscore=" + stufeenbackscore + ", opinions=" + opinions + ", opinion=" + opinion
+				+ ", roles=" + roles + ", major_statistics=" + major_statistics + "]";
+	}
 	
 }

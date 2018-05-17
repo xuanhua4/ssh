@@ -1,6 +1,7 @@
 package com.newture.action;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -24,6 +25,7 @@ import com.newture.service.FeenbackService;
 import com.newture.service.Feenback_itemService;
 import com.newture.service.FeenbackscoreService;
 import com.newture.util.Json;
+import com.newture.util.Tuser_course;
 import com.opensymphony.xwork2.ActionSupport;
 
 import net.sf.json.JSONArray;
@@ -140,21 +142,25 @@ public class FeenbackscoreAction extends ActionSupport implements ServletRequest
 	 * @return
 	 */
 	public String find() throws Exception{
-		Users users =feenbackscoreService.findClass(1);
+		Users users =feenbackscoreService.findClass(2);
 		Classes cls = users.getStuclasses();
 		Set<Class_schedule> classschedule = cls.getClasschedule();
-		List<Integer> fid =null;
-		for(Object obj:classschedule){
-			 Class_schedule c1 = (Class_schedule) obj;
+		Set<Feenback> fid = new HashSet<Feenback>();
+		Set<Tuser_course> list = new HashSet<Tuser_course>();
+		for(Class_schedule obj:classschedule){
+			Tuser_course tc = new Tuser_course();
+			 Class_schedule c1 = obj;
+			 tc.setUsername(c1.getUsers().getUsername());
+			 tc.setCoursename(c1.getCourse().getCoursename());
+			 list.add(tc);
 			 Set<Feenback> feenback = c1.getFeenback();
-	         for(Object obj1:feenback){
-	        	 Feenback c2 = (Feenback) obj;
-	        	 fid.add(c2.getFeenback_id());
+	         for(Feenback obj1:feenback){
+	        	 fid.add(obj1);
 		     }
 	     }
-		List<Integer> newList = new ArrayList<Integer>(new TreeSet<Integer>(fid));
-		request.setAttribute("fid", newList);
-		return NONE;
+		request.setAttribute("tusers", list);
+		request.setAttribute("fid", fid);
+		return SUCCESS;
 	}
 	public String findbyid(){
 		Feenback f =  feenbackService.findById(feenback.getFeenback_id());
@@ -177,8 +183,8 @@ public class FeenbackscoreAction extends ActionSupport implements ServletRequest
 	}
 	
 	@Override
-	public void setServletRequest(HttpServletRequest arg0) {
+	public void setServletRequest(HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		
+		this.request = request;
 	}
 }

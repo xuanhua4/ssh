@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <meta charset="utf-8">
 <title>指标类管理</title>
-<link rel="stylesheet" href="../../plugins/layui/css/layui.css"
+<link rel="stylesheet" href="<%=basePath %>test1/plugins/layui/css/layui.css"
 	media="all">
 </head>
 <body>
@@ -20,32 +20,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</fieldset>
 	<div class="layui-btn-group demoTable">
 		<button style="margin-left: 10px;" class="layui-btn layui-btn-primary" data-type="getCheckData">删除选中行数据</button>
-		<button style="margin-left: 10px;" class="layui-btn layui-btn-primary" data-type="getCheckLength">获取选中数目</button>
-		<button style="margin-left: 10px;" class="layui-btn layui-btn-primary" data-type="isAll">验证是否全选</button>
-		<button style="margin-left: 10px;" class="layui-btn layui-btn-primary" data-type="add">新增</button>
+		<button style="left: 10px;" class="layui-btn layui-btn-primary" data-type="add">提交</button>
 	</div><hr/>
-	
-		<table class="layui-table" lay-data="{width:1000, url:'Feenback_findByid.action?f1id=1',id:'test3'}" lay-filter="test3">
+	 <c:forEach items="${fid }" var="feenback">
+		<table class="layui-table" lay-data="{width:1000, url:'Feenback_findList.action?f1id=${feenback.feenback_id }',id:'test3'}" lay-filter="test3">
   		<thead>
   	 <tr>
-   	 	<th lay-data="{align:'center',width: 1000}" rowspan="1" colspan="4">指标类别</th>
+   	 	<th lay-data="{align:'center',width: 1000}" rowspan="1" colspan="5">${feenback.feenback_name }</th>
    	 </tr>
     <tr>
-    	<th lay-data="{type:'numbers'}" rowspan="2" >序号</th>
-     	<th lay-data="{field:'feenback_name', width:500}" rowspan="2">指标</th>
-     	<th lay-data="{field: 'fb_score', width: 100}" rowspan="2" >分值</th>
-      	<th lay-data="{align:'center',width: 200}" colspan="2">老师</th>
+    	<th lay-data="{type:'numbers',width:40}" rowspan="2" >序号</th>
+     	<th lay-data="{field:'fb_name', width:400}" rowspan="2">指标</th>
+     	<th lay-data="{field: 'fb_score', width: 80}" rowspan="2" >分值</th>
+     	<c:forEach items="${tusers }" var="tc">
+     		<th lay-data="{field:'score',align:'center',width: 80,edit: 'text'}" colspan="1" rowspan="1">${tc.username }</th>
+ 	 	</c:forEach>
     </tr>
     <tr>
-      <th lay-data="{field:'score',width: 200, align:'center',edit: 'text'}" colspan="1">课程</th>
+   	 <c:forEach items="${tusers }" var="tc">
+     		<th lay-data="{width: 80, align:'center'}" colspan="1" rowspan="1">${tc.coursename }</th>
+ 	 	</c:forEach>
+      
     </tr>
   </thead>
   </table>
-  <c:forEach items="${fid }" var="aco">
+ 
+
   </c:forEach>
-	<div id="demo"></div>
 </body>
-<script src="../../plugins/layui/layui.js"></script>
+<script src="<%=basePath %>test1/plugins/layui/layui.js"></script>
 <script>
 		layui.use(['form','table','laypage'], function() {
 			var table = layui.table,
@@ -62,5 +65,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  });
 			
 		});
+		
 	</script>
 </html>
