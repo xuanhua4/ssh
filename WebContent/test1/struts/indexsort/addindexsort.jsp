@@ -73,7 +73,7 @@
 			
 			form.on('submit(demo2)', function(data) {
 				console.log(data);
-				/* $.ajax({
+				$.ajax({
 					url:"Feenback_save.action"
 					,data: data.field
 					,async:true
@@ -88,7 +88,7 @@
 							}
 						})
 					}
-				}) */
+				}) 
 				return false;
 			});
 
